@@ -22,6 +22,7 @@ class GameOfLifeTest extends TestCase
     public function testGame()
     {
         $game = new Game();
+        $game->step();
         $this->assertTrue(true);
     }
 }

@@ -12,5 +12,10 @@ namespace App;
  */
 class Game
 {
-
+    /**
+     * Goes into next step of the game.
+     */
+    public function step(): void
+    {
+    }
 }
