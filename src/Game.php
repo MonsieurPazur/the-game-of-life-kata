@@ -18,4 +18,14 @@ class Game
     public function step(): void
     {
     }
+
+    /**
+     * Returns result Game matrix.
+     *
+     * @return array result Game two-dimensional array
+     */
+    public function get(): array
+    {
+        return [];
+    }
 }

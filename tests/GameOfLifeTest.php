@@ -23,6 +23,6 @@ class GameOfLifeTest extends TestCase
     {
         $game = new Game();
         $game->step();
-        $this->assertTrue(true);
+        $this->assertIsArray($game->get());
     }
 }
