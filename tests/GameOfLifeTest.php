@@ -21,8 +21,14 @@ class GameOfLifeTest extends TestCase
      */
     public function testGame()
     {
-        $game = new Game();
+        $grid = [
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+        ];
+        $game = new Game($grid);
         $game->step();
         $this->assertIsArray($game->get());
+        $this->assertEquals($grid, $game->get());
     }
 }

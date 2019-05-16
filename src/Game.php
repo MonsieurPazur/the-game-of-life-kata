@@ -13,6 +13,20 @@ namespace App;
 class Game
 {
     /**
+     * @var array game grid, consisting of dead or alive cells
+     */
+    private $grid;
+
+    /**
+     * Game constructor.
+     * @param array $grid
+     */
+    public function __construct(array $grid)
+    {
+        $this->grid = $grid;
+    }
+
+    /**
      * Goes into next step of the game.
      */
     public function step(): void
@@ -26,6 +40,6 @@ class Game
      */
     public function get(): array
     {
-        return [];
+        return $this->grid;
     }
 }
