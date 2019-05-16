@@ -7,6 +7,7 @@
 namespace Test;
 
 use App\Game;
+use Generator;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,17 +19,44 @@ class GameOfLifeTest extends TestCase
 
     /**
      * Tests basic game functionalities.
+     *
+     * @dataProvider gridProvider
+     *
+     * @param array $input initial grid
+     * @param int $steps amount of steps to apply
+     * @param array $expected expected result grid
      */
-    public function testGame()
+    public function testGame(array $input, int $steps, array $expected)
     {
-        $grid = [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
+        $game = new Game($input);
+        for ($i = 0; $i < $steps; $i++) {
+            $game->step();
+        }
+        $this->assertEquals($expected, $game->get());
+    }
+
+    /**
+     * Grid data provider.
+     * Consists of initial grid, number of steps, and expected result grid.
+     *
+     * @return Generator
+     */
+    public function gridProvider()
+    {
+        yield '3x3 all dead' =>
+        [
+            'input' => [
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]
+            ],
+            'steps' => 0,
+            'expected' => [
+
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]
+            ]
         ];
-        $game = new Game($grid);
-        $game->step();
-        $this->assertIsArray($game->get());
-        $this->assertEquals($grid, $game->get());
     }
 }
