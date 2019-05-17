@@ -130,10 +130,24 @@ class Game
      */
     private function applyRules(int $i, int $j): void
     {
-        if (2 === $this->neighbours[$i][$j] || 3 === $this->neighbours[$i][$j]) {
-            $this->grid[$i][$j] = self::CELL_ALIVE;
+        if (self::CELL_ALIVE === $this->grid[$i][$j]) {
+            // 1. Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+            if ($this->neighbours[$i][$j] < 2) {
+                $this->grid[$i][$j] = self::CELL_DEAD;
+            }
+            // 2. Any live cell with two or three live neighbours lives on to the next generation.
+            if (2 === $this->neighbours[$i][$j] || 3 === $this->neighbours[$i][$j]) {
+                $this->grid[$i][$j] = self::CELL_ALIVE;
+            }
+            // 3. Any live cell with more than three live neighbours dies, as if by overpopulation.
+            if ($this->neighbours[$i][$j] > 3) {
+                $this->grid[$i][$j] = self::CELL_DEAD;
+            }
         } else {
-            $this->grid[$i][$j] = self::CELL_DEAD;
+            // 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+            if (3 === $this->neighbours[$i][$j]) {
+                $this->grid[$i][$j] = self::CELL_ALIVE;
+            }
         }
     }
 }

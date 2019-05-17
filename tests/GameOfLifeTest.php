@@ -69,6 +69,19 @@ class GameOfLifeTest extends TestCase
                 [0, 0, 0]
             ]
         ];
+        yield '3x3 blinker' => [
+            'input' => [
+                [0, 0, 0],
+                [1, 1, 1],
+                [0, 0, 0]
+            ],
+            'steps' => 1,
+            'expected' => [
+                [0, 1, 0],
+                [0, 1, 0],
+                [0, 1, 0]
+            ]
+        ];
         yield '2x2 still life' => [
             'input' => [
                 [1, 1],
