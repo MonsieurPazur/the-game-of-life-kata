@@ -69,5 +69,16 @@ class GameOfLifeTest extends TestCase
                 [0, 0, 0]
             ]
         ];
+        yield '2x2 still life' => [
+            'input' => [
+                [1, 1],
+                [1, 1]
+            ],
+            'steps' => 5,
+            'expected' => [
+                [1, 1],
+                [1, 1]
+            ]
+        ];
     }
 }
