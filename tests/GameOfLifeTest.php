@@ -43,8 +43,7 @@ class GameOfLifeTest extends TestCase
      */
     public function gridProvider()
     {
-        yield '3x3 all dead' =>
-        [
+        yield '3x3 all dead' => [
             'input' => [
                 [0, 0, 0],
                 [0, 0, 0],
@@ -52,7 +51,19 @@ class GameOfLifeTest extends TestCase
             ],
             'steps' => 0,
             'expected' => [
-
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]
+            ]
+        ];
+        yield '3x3 one alive' => [
+            'input' => [
+                [0, 0, 0],
+                [0, 1, 0],
+                [0, 0, 0]
+            ],
+            'steps' => 1,
+            'expected' => [
                 [0, 0, 0],
                 [0, 0, 0],
                 [0, 0, 0]
