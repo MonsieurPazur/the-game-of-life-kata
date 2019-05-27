@@ -39,8 +39,8 @@ class Grid
     public function get(): array
     {
         $rawGrid = [];
-        for ($i = 0; $i < count($this->grid); $i++) {
-            for ($j = 0; $j < count($this->grid[0]); $j++) {
+        for ($i = 0, $iMax = count($this->grid); $i < $iMax; $i++) {
+            for ($j = 0, $jMax = count($this->grid[0]); $j < $jMax; $j++) {
                 $rawGrid[$i][$j] = $this->grid[$i][$j]->getState();
             }
         }
@@ -65,8 +65,8 @@ class Grid
      */
     private function initGrid(array $initial): void
     {
-        for ($i = 0; $i < count($initial); $i++) {
-            for ($j = 0; $j < count($initial[0]); $j++) {
+        for ($i = 0, $iMax = count($initial); $i < $iMax; $i++) {
+            for ($j = 0, $jMax = count($initial[0]); $j < $jMax; $j++) {
                 $this->neighbours[$i][$j] = 0;
                 $this->grid[$i][$j] = new Cell($initial[$i][$j]);
             }
@@ -78,8 +78,8 @@ class Grid
      */
     private function updateNeighbours(): void
     {
-        for ($i = 0; $i < count($this->grid); $i++) {
-            for ($j = 0; $j < count($this->grid[0]); $j++) {
+        for ($i = 0, $iMax = count($this->grid); $i < $iMax; $i++) {
+            for ($j = 0, $jMax = count($this->grid[0]); $j < $jMax; $j++) {
                 $this->neighbours[$i][$j] = $this->getNeighboursCount($i, $j);
             }
         }
@@ -90,8 +90,8 @@ class Grid
      */
     private function updateGrid(): void
     {
-        for ($i = 0; $i < count($this->grid); $i++) {
-            for ($j = 0; $j < count($this->grid[0]); $j++) {
+        for ($i = 0, $iMax = count($this->grid); $i < $iMax; $i++) {
+            for ($j = 0, $jMax = count($this->grid[0]); $j < $jMax; $j++) {
                 $this->applyRules($i, $j);
             }
         }
@@ -110,9 +110,9 @@ class Grid
         $neighbours = 0;
         for ($y = $i - 1; $y <= $i + 1; $y++) {
             for ($x = $j - 1; $x <= $j + 1; $x++) {
-                if (isset($this->grid[$y][$x])
+                if (!($x === $j && $y === $i)
+                    && isset($this->grid[$y][$x])
                     && $this->grid[$y][$x]->isAlive()
-                    && !($x == $j && $y == $i)
                 ) {
                     $neighbours++;
                 }
@@ -142,11 +142,8 @@ class Grid
             if ($this->neighbours[$i][$j] > 3) {
                 $this->grid[$i][$j]->kill();
             }
-        } else {
-            // 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-            if (3 === $this->neighbours[$i][$j]) {
-                $this->grid[$i][$j]->ressurect();
-            }
+        } elseif (3 === $this->neighbours[$i][$j]) {
+            $this->grid[$i][$j]->ressurect();
         }
     }
 }

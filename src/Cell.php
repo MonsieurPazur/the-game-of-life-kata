@@ -15,12 +15,12 @@ class Cell
     /**
      * @var int Cell that is alive
      */
-    const ALIVE = 1;
+    public const ALIVE = 1;
 
     /**
      * @var int Cell that is dead
      */
-    const DEAD = 0;
+    public const DEAD = 0;
 
     /**
      * @var int $state state of Cell

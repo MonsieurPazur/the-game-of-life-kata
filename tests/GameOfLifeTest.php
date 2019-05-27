@@ -26,7 +26,7 @@ class GameOfLifeTest extends TestCase
      * @param int $steps amount of steps to apply
      * @param array $expected expected result grid
      */
-    public function testGame(array $input, int $steps, array $expected)
+    public function testGame(array $input, int $steps, array $expected): void
     {
         $game = new Game($input);
         for ($i = 0; $i < $steps; $i++) {
@@ -41,7 +41,7 @@ class GameOfLifeTest extends TestCase
      *
      * @return Generator
      */
-    public function gridProvider()
+    public function gridProvider(): Generator
     {
         yield '3x3 all dead' => [
             'input' => [
